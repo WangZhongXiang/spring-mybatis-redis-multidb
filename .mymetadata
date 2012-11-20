@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="spring-mybatis-redis-multidb"
+  id="myeclipse.1351240442143"
+  context-root="/shop-spring-mybatis-redis-mvn"
+  j2ee-spec="6.0"
+  archive="spring-mybatis-redis-multidb.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/tx 
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+      http://www.springframework.org/schema/jdbc 
+      http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+     http://www.springframework.org/schema/context
+	 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<!-- enable autowire -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.huawei.shop" />
+
+	<!--配置jdbc.properties文件的位置信息，路径还是区分大小写 -->
+	<!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+		<property name="locations" value="WEB-INF/jdbc/jdbc.properties" /> </bean> -->
+
+	<context:property-placeholder location="WEB-INF/jdbc/jdbc.properties" />
+
+	<bean id="parentDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource" />
+
+	<!-- 读取jdbc.properties文件，配置数据源 -->
+	<bean id="readDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 数据库连接池配置 -->
+		<property name="initialSize" value="${jdbc.initialPoolSize}" />
+		<!-- 初始化连接数量 -->
+		<property name="maxActive" value="${jdbc.maxPoolSize}" />
+		<!-- 最大连接数量 -->
+		<property name="maxIdle" value="${jdbc.maxIdlePollSize}" />
+		<!-- 最大空闲连接数量 -->
+		<property name="minIdle" value="${jdbc.mixIdlePollSize}" />
+		<!-- 最小空闲连接数量 -->
+	</bean>
+
+	<bean id="writeDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc1.url}" />
+		<property name="username" value="${jdbc1.user}" />
+		<property name="password" value="${jdbc1.password}" />
+		<!-- 数据库连接池配置 -->
+		<property name="initialSize" value="${jdbc.initialPoolSize}" />
+		<!-- 初始化连接数量 -->
+		<property name="maxActive" value="${jdbc.maxPoolSize}" />
+		<!-- 最大连接数量 -->
+		<property name="maxIdle" value="${jdbc.maxIdlePollSize}" />
+		<!-- 最大空闲连接数量 -->
+		<property name="minIdle" value="${jdbc.mixIdlePollSize}" />
+		<!-- 最小空闲连接数量 -->
+	</bean>
+
+	<bean id="dataSource" class="com.huawei.shop.framework.DynamicDataSource">
+		<!-- 通过key-value的形式来关联数据源 -->
+		<property name="targetDataSources">
+			<map key-type="com.huawei.shop.framework.constants.DatabaseType">
+				<entry key="writeDataSource" value-ref="writeDataSource"></entry>
+				<entry key="readDataSource" value-ref="readDataSource"></entry>
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="readDataSource" />
+	</bean>
+
+	<!-- sqlSessionFactory --><!-- MyBatis在spring中Bean的配置，都是固定的 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="WEB-INF/mybatis/Mybatis-Configuration.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.huawei.shop.model" />
+	</bean>
+
+	<!-- <bean id="SqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<constructor-arg index="0" ref="sqlSessionFactory" /> </bean> -->
+
+	<!-- scan for mappers and let them be autowired -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.huawei.shop.repository" />
+	</bean>
+
+</beans>

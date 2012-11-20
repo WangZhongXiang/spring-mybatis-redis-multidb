@@ -1,0 +1,30 @@
+
+.indexbody {
+	background-image: url(../images/index_bg.png)  ;
+    background-repeat:no-repeat;
+    background-position:top;
+    background-attachment:fixed;
+    background-color:#dddddd
+}
+
+.loginbody {
+	background-image: url(../images/login_bg.jpg)   ;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-attachment:fixed;
+    background-color:#dddddd;
+}
+
+.center {
+position:absolute;
+top:40%;
+left:40%
+}
+
+.logindiv {
+background-color:white;
+position:absolute;
+top:40%;
+left:55%
+}
+

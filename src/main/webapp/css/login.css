@@ -1,0 +1,88 @@
+body {
+	background: url(../images/login_bg.png) fixed center top no-repeat #dddddd;
+}
+
+div{
+	background-image:url(../images/login_panel.png);
+	top:15%;
+    left: 20%;
+    position: absolute;
+    height:535px;
+    width:826px;
+}
+
+#table1{
+		margin: auto;
+		margin-top: 160px;
+		margin-left: 70px;
+		width:250px;
+		font-style:normal;
+		font-weight:normal;
+		font-size:12px;
+		line-height: 24px;
+		color: #666666;
+}
+#table2{
+		margin: auto;
+		margin-top: 25px;
+		margin-left: 85px;
+		width:250px;
+		font-style:normal;
+		font-weight:normal;
+		font-size:16px;
+		line-height: 24px;
+		color: #666666;
+}
+
+#table3{
+		margin: auto;
+		margin-top: -180px;
+		margin-left: 400px;
+		width:380px;
+		font-style:normal;
+		font-weight:normal;
+		font-size:20px;
+		line-height: 24px;
+		color: #666666;
+}
+
+.text{
+	background: none;
+	line-height: 30px;
+	width:300px;
+	border: medium none;
+	font-style:normal;
+	font-weight:normal;
+	font-size:16px;
+}
+
+.textback
+{
+	background-image: url(../images/login_text.png);
+	background-repeat: no-repeat;
+	height:43px;
+	width:364px;
+}
+
+.button1{
+	color: #666666;
+	margin: auto;
+	margin-top: -100px;
+	margin-left: 355px;
+	font-style:normal;
+	font-weight:400;
+	font-size:13.3333px;
+	line-height: 24px;
+	height:40px;
+	width:80px;
+}
+
+.button2{
+	color: #666666;
+	margin: auto;
+	margin-top: 10px;
+	margin-left: 190px;
+	height:40px;
+	width:80px;
+}
+
